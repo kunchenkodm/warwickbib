@@ -123,3 +123,9 @@ _markdown*/
 *.bst
 *.markdown.in
 *.ins
+
+# Locally generated releases
+*.zip
+releases/
+overleaf_release/
+sample_test/
