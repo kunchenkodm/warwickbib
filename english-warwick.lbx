@@ -1,0 +1,34 @@
+\ProvidesFile{english-warwick.lbx}[2026/07/18 Warwick Economics Harvard localization]
+
+\InheritBibliographyExtras{english}
+
+\DeclareBibliographyStrings{%
+  inherit          = {english},
+  urlseen          = {{Accessed\addcolon\space}{Accessed\addcolon\space}},
+  andothers        = {{\mkbibemph{et\addabbrvspace al\adddot}}{\mkbibemph{et\addabbrvspace al\adddot}}},
+  in               = {{in}{in}},
+  editor           = {{(ed.)}{(ed.)}},
+  editors          = {{(eds.)}{(eds.)}},
+  edition          = {{edn\adddot}{edn\adddot}},
+}
+
+\DeclareBibliographyExtras{%
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#3}
+      {}
+      {\stripzeros{\thefield{#3}}%
+       \iffieldundef{#2}{}{\nobreakspace}}%
+    \iffieldundef{#2}
+      {}
+      {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#1}{}{\space}}%
+    \iffieldbibstring{#1}{\bibstring{\thefield{#1}}}{\stripzeros{\thefield{#1}}}}%
+  \protected\def\mkbibseasondateshort#1#2{%
+    \mkbibseason{\thefield{#2}}%
+    \iffieldundef{#1}{}{\space}%
+    \mkyearzeros{\thefield{#1}}}%
+  \protected\def\mkbibseasondatelong#1#2{%
+    \mkbibseason{\thefield{#2}}%
+    \iffieldundef{#1}{}{\space}%
+    \mkyearzeros{\thefield{#1}}}%
+}
