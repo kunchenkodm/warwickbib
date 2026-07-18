@@ -23,8 +23,8 @@ release:
 	python3 release_automation.py
 
 distclean: clean
-	rm -f $(CTR_NAME).{pdf,bib,ins,bbx,cbx} english-ctr.lbx
-	rm -f $(WW_NAME).{pdf,bib,ins,bbx,cbx} english-warwick.lbx
+	rm -f $(CTR_NAME).{pdf,bib,ins,bbx,cbx} english-ctr.lbx british-ctr.lbx
+	rm -f $(WW_NAME).{pdf,bib,ins,bbx,cbx} english-warwick.lbx british-warwick.lbx
 	rm -f *-release.zip
 
 clean:

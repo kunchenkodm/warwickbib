@@ -19,9 +19,11 @@ with zipfile.ZipFile(overleaf_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
     zipf.write("harvard-ctr.bbx")
     zipf.write("harvard-ctr.cbx")
     zipf.write("english-ctr.lbx")
+    zipf.write("british-ctr.lbx")
     zipf.write("harvard-warwick.bbx")
     zipf.write("harvard-warwick.cbx")
     zipf.write("english-warwick.lbx")
+    zipf.write("british-warwick.lbx")
     zipf.write("../README.md", "README.md")
 print(f"Created {overleaf_zip}")
 
@@ -43,9 +45,11 @@ with zipfile.ZipFile(ctan_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
     zipf.write("harvard-ctr.bbx")
     zipf.write("harvard-ctr.cbx")
     zipf.write("english-ctr.lbx")
+    zipf.write("british-ctr.lbx")
     zipf.write("harvard-warwick.bbx")
     zipf.write("harvard-warwick.cbx")
     zipf.write("english-warwick.lbx")
+    zipf.write("british-warwick.lbx")
 print(f"Created {ctan_zip}")
 
 print("All releases packaged successfully!")

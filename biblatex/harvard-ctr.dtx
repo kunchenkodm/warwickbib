@@ -19,7 +19,13 @@
 %<*lbx>
 \ProvidesFile{english-ctr.lbx}
     [\Version\space English conventions for standard Cite Them Right (Harvard)]
+\InheritBibliographyExtras{english}
 %</lbx>
+%<*british>
+\ProvidesFile{british-ctr.lbx}
+    [\Version\space British conventions for standard Cite Them Right (Harvard)]
+\InheritBibliographyExtras{british}
+%</british>
 %<*readme>
 # harvard-ctr: Standard Cite Them Right Harvard referencing style
 %</readme>
@@ -57,6 +63,7 @@ Copyright (C) 2026
   \file{harvard-ctr.bbx}{\from{\jobname.dtx}{bbx}}
   \file{harvard-ctr.cbx}{\from{\jobname.dtx}{cbx}}
   \file{english-ctr.lbx}{\from{\jobname.dtx}{lbx}}
+  \file{british-ctr.lbx}{\from{\jobname.dtx}{british}}
 }
 %</install>
 %<install>\endbatchfile
@@ -1371,7 +1378,7 @@ Copyright (C) 2026
 \DeclareNameAlias{translator}{sortname}
 
 \DeclareLanguageMapping{english}{english-ctr}
-\DeclareLanguageMapping{british}{english-ctr}
+\DeclareLanguageMapping{british}{british-ctr}
 \DeclareLanguageMapping{american}{english-ctr}
 
 \defbibenvironment{bibliography}
