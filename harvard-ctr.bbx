@@ -1,17 +1,17 @@
 %%
-%% This is file `harvard-warwick.bbx',
+%% This is file `harvard-ctr.bbx',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% harvard-warwick.dtx  (with options: `bbx')
+%% harvard-ctr.dtx  (with options: `bbx')
 %% ----------------------------------------------------------------
-%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% harvard-ctr --- Standard Cite Them Right Harvard referencing style
 %% ----------------------------------------------------------------
 \def\Version{2026/07/18 v13.0.0}
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesFile{harvard-warwick.bbx}
-    [\Version\space Bibliography style for Warwick Economics (Harvard)]
+\ProvidesFile{harvard-ctr.bbx}
+    [\Version\space Bibliography style for standard Cite Them Right (Harvard)]
 
 
 
@@ -232,7 +232,7 @@
 \DeclareFieldFormat[misc,artwork,audio,video]{type}{\mkbibbrackets{\ifbibstring{#1}{\bibstring{#1}}{#1}}}
 \DeclareFieldFormat[misc,artwork,audio,video]{howpublished}{\mkbibbrackets{#1}}
 
-\DeclareFieldFormat{url}{Available at: \url{#1}}
+\DeclareFieldFormat{url}{\url{#1}}
 \setlength{\bibitemsep}{\baselineskip}
 \setlength{\bibhang}{0pt} % removes bibliography paragraph indentation
 
@@ -280,7 +280,7 @@
 
 \ExecuteBibliographyOptions{isbn=false, eprint=false, maxbibnames=99, maxcitenames=2, mincitenames=1}
 
-\DeclareFieldFormat{doi}{Available at\addcolon\space\url{https://doi.org/#1}}
+\DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
 \AtEveryBibitem{%
   \iffieldundef{doi}
     {}
@@ -350,9 +350,9 @@
 \DeclareNameAlias{editor}{sortname}
 \DeclareNameAlias{translator}{sortname}
 
-\DeclareLanguageMapping{english}{english-warwick}
-\DeclareLanguageMapping{british}{english-warwick}
-\DeclareLanguageMapping{american}{english-warwick}
+\DeclareLanguageMapping{english}{english-ctr}
+\DeclareLanguageMapping{british}{english-ctr}
+\DeclareLanguageMapping{american}{english-ctr}
 
 \defbibenvironment{bibliography}
   {\list
@@ -530,7 +530,11 @@
 %%
 %% End of file `harvard-warwick.bbx'.
 
+\iftoggle{bbx:v12}
+  {}
+  {\AtEveryBibitem{\ifentrytype{book}{\clearlist{location}}{}}}
+
 %% 
 %% Copyright (C) 2026
 %%
-%% End of file `harvard-warwick.bbx'.
+%% End of file `harvard-ctr.bbx'.

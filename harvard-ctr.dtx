@@ -1,0 +1,1830 @@
+% \iffalse meta-comment
+%<*internal|bbx|cbx|lbx>
+\def\Version{2026/07/18 v13.0.0}
+%</internal|bbx|cbx|lbx>
+%<*internal>
+\iffalse
+%</internal>
+%<*bbx|cbx|lbx>
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+%</bbx|cbx|lbx>
+%<*bbx>
+\ProvidesFile{harvard-ctr.bbx}
+    [\Version\space Bibliography style for standard Cite Them Right (Harvard)]
+%</bbx>
+%<*cbx>
+\ProvidesFile{harvard-ctr.cbx}
+    [\Version\space Citation style for standard Cite Them Right (Harvard)]
+%</cbx>
+%<*lbx>
+\ProvidesFile{english-ctr.lbx}
+    [\Version\space English conventions for standard Cite Them Right (Harvard)]
+%</lbx>
+%<*readme>
+# harvard-ctr: Standard Cite Them Right Harvard referencing style
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+
+\nopreamble\nopostamble
+
+\usedir{doc/latex/\jobname}
+\generate{
+  \file{README.md}{\from{\jobname.dtx}{readme}}
+  \file{\jobname.bib}{\from{\jobname.dtx}{bib}}
+}
+
+\preamble
+----------------------------------------------------------------
+harvard-ctr --- Standard Cite Them Right Harvard referencing style
+----------------------------------------------------------------
+\endpreamble
+\postamble
+
+Copyright (C) 2026
+\endpostamble
+
+\usedir{tex/latex/\jobname}
+\generate{
+  \file{harvard-ctr.bbx}{\from{\jobname.dtx}{bbx}}
+  \file{harvard-ctr.cbx}{\from{\jobname.dtx}{cbx}}
+  \file{english-ctr.lbx}{\from{\jobname.dtx}{lbx}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/\jobname}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%<*driver>
+\ProvidesFile{harvard-ctr.dtx}
+    [\Version\space Standard Cite Them Right Harvard referencing style]
+
+\documentclass[10pt,a4paper]{article}
+\usepackage[british]{babel}
+\usepackage{doc}
+\usepackage[hmargin=3cm,vmargin=2.5cm]{geometry}
+\frenchspacing
+
+\usepackage{csquotes}
+\usepackage[style=harvard-ctr, backend=biber]{biblatex}
+\usepackage{hyperref}
+\addbibresource{\jobname.bib}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{The \textsf{harvard-ctr} package}
+% \author{Antigravity QA}
+% \date{\Version}
+% \maketitle
+%
+% \begin{abstract}
+% This package provides a BibLaTeX implementation of the standard Cite Them Right (Harvard) referencing style, 13th Edition.
+% \end{abstract}
+%
+% \section{Introduction}
+% This package implements the standard Cite Them Right (CTR) guidelines for Harvard referencing.
+% By default, this package formats citations according to the \textbf{13th edition} (e.g. Publisher Locations are omitted).
+% To revert to the 12th edition rules and retain publisher locations for books, pass \texttt{v12=true} when loading biblatex:
+% \begin{verbatim}
+% \usepackage[style=harvard-ctr, v12=true]{biblatex}
+% \end{verbatim}
+% It ensures commas separate blocks, 'et al.' is used correctly, and redundant fields are hidden.
+%
+% \section{Usage}
+% Load the package in your preamble:
+% \begin{verbatim}
+% \usepackage[style=harvard-ctr, backend=biber]{biblatex}
+% \end{verbatim}
+%
+
+% \section{Examples}
+% 
+% \subsection{Books and book chapters}
+% For books, use the \texttt{@book} entry type. 
+% For edited book chapters, use \texttt{@incollection}.
+% Ensure that editions use the suffix \texttt{edn.} automatically.
+
+% 
+% \subsubsection*{Book with author(s)}
+% \begin{verbatim}
+% @book{rang.etal2012rdp,
+%   author = {Rang, H. P. and Dale, M. M. and Ritter, J. M. and Flower, R. J. and Henderson, G.},
+%   year = {2012},
+%   title = {Rang and {Dale's} Pharmacology},
+%   edition = {7},
+%   address = {Edinburgh},
+%   publisher = {Elsevier Churchill Livingstone}}
+% \end{verbatim}
+% \begin{verbatim}
+% @book{ou1972em,
+%   author = {{Open University}},
+%   year = {1972},
+%   title = {Electricity and Magnetism},
+%   address = {Bletchley},
+%   publisher = {Open University Press}}
+% \end{verbatim}
+% \begin{verbatim}
+% @book{solomon.etal2019cbe,
+%   author = {Solomon, M. R. and Askegaard, S. and Hogg, M. and Bamossy, G. J.},
+%   year = {2019},
+%   title = {Consumer Behaviour: a {European} Perspective},
+%   edition = {7},
+%   address = {Harlow},
+%   publisher = {Pearson}}
+% \end{verbatim}
+% 
+% \subsubsection*{Book with editor(s) instead of author(s)}
+% \begin{verbatim}
+% @book{rothman.etal2008me,
+%   editor = {Kenneth J. Rothman and Sander Greenland and Timothy L. Lash},
+%   year = {2008},
+%   title = {Modern Epidemiology},
+%   edition = {3},
+%   address = {Philadelphia, Pa.},
+%   publisher = {Lippincott Williams \& Wilkins}}
+% \end{verbatim}
+% 
+% \subsubsection*{Electronic book}
+% \begin{verbatim}
+% @book{haynes2014crc,
+%   editor = {Haynes, W. M.},
+%   year = {2014},
+%   title = {{CRC} Handbook of Chemistry and Physics},
+%   edition = {94},
+%   address = {Boca Raton, Fla.},
+%   publisher = {CRC Press/{Taylor and Francis}},
+%   url = {http://www.hbcpnetbase.com},
+%   urldate = {2016-06-16}}
+% \end{verbatim}
+% \begin{verbatim}
+% @book{blockley2021evs,
+%   author = {Blockley, D.},
+%   year = {2021},
+%   title = {Engineering: a Very Short Introduction},
+%   address = {Oxford},
+%   publisher = {Oxford University Press},
+%   url = {https://www.amazon.co.uk/kindle},
+%   urldate = {2021-06-30}}
+% \end{verbatim}
+% 
+% \subsubsection*{Book known by its title}
+% \begin{verbatim}
+% @reference{bnf2020,
+%   year = {2020},
+%   title = {{British National Formulary}},
+%   edition = {79},
+%   address = {London},
+%   publisher = {Pharmaceutical Press}}
+% \end{verbatim}
+% \begin{verbatim}
+% @inreference{aspirin2020bnf,
+%   title = {Aspirin},
+%   year = {2020},
+%   booktitle = {{British National Formulary}},
+%   edition = {79},
+%   address = {London},
+%   publisher = {Pharmaceutical Press},
+%   pages = {280-281}}
+% \end{verbatim}
+% \begin{verbatim}
+% @inreference{aspirin2019bnf,
+%   title = {Aspirin},
+%   year = {2019},
+%   booktitle = {{British National Formulary}},
+%   address = {London},
+%   publisher = {Pharmaceutical Press},
+%   url = {https://www.medicinescomplete.com/#/content/bnf/_456850132},
+%   urldate = {2019-11-26}}
+% \end{verbatim}
+% 
+% \subsubsection*{Chapter\slash paper from a collection (by different authors) in an edited book}
+% \begin{verbatim}
+% @incollection{burchard1965hhl,
+%   author = {Burchard, J. E.},
+%   year = {1965},
+%   title = {How Humanists use a Library},
+%   editor = {C. F. J. Overhage and J. R. Harman},
+%   booktitle = {Intrex},
+%   booksubtitle = {Report on a Planning Conference and Information Transfer Experiments},
+%   address = {Cambridge, Mass.},
+%   publisher = {MIT Press},
+%   pages = {41-87}}
+% \end{verbatim}
+% \begin{verbatim}
+% @incollection{reid1967ptp,
+%   author = {D. R. Reid},
+%   year = {1967},
+%   title = {Physical Testing of Polymer Films},
+%   editor = {S. H. Pinner},
+%   booktitle = {Modern Packaging Films},
+%   address = {London},
+%   publisher = {Butterworths},
+%   pages = {143-183}}
+% \end{verbatim}
+% 
+% \subsection{Articles and periodicals}
+% For journal articles, use the \texttt{@article} entry type. 
+% The format is: \texttt{Author (Year) 'Title', \emph{Journal Title}, Volume(Issue), pp. x-y.}
+% Note the absence of the 'In:' prefix and the strict Volume(Issue) formatting.
+
+% 
+% \subsubsection*{Journal article}
+% \begin{verbatim}
+% @article{stieg1981cer,
+%   author = {Stieg, M. F.},
+%   year = {1981},
+%   title = {Continuing Education and the Reference Librarian in the Academic and Research Library},
+%   journal = {Library Journal},
+%   volume = {105},
+%   number ={22},
+%   pages = {2547-2551}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{stieg1981inh,
+%   author = {Stieg, M. F.},
+%   year = {1981},
+%   title = {The Information Needs of Historians},
+%   journal = {College and Research Libraries},
+%   volume = {42},
+%   number ={6},
+%   pages = {549-560}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{newman2010mcb,
+%   author = {Newman, R.},
+%   year = {2010},
+%   title = {Malaria control beyond 2010},
+%   journal = {{British} Medical Journal},
+%   volume = {341},
+%   number = {7765},
+%   pages = {157-208}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{wetzstein.etal2020iai,
+%   author = {Wetzstein, G. and Ozcan, A. and Gigan, S. and Fan, S. and
+%     Englund, D. and Soljacic, M. and Denz, C. and Miller, D. A. B. and
+%     Psaltis, D.},
+%   year = {2020},
+%   title = {Inference in Artificial Intelligence with Deep Optics and Photonics},
+%   journal = {Nature},
+%   volume = {588},
+%   number = {7836},
+%   pages = {39-47}}
+% \end{verbatim}
+% 
+% \subsubsection*{Electronic journal article}
+% \begin{verbatim}
+% @article{devlin.etal2021ipp,
+%   author = {Devlin, S. M. and Martin, A. and Ostrovnaya, I.},
+%   year = {2021},
+%   title = {Identifying Prognostic Pairwise Relationships Among Bacterial
+%     Species in Microbiome Studies},
+%   journal = {{PLOS} Computational Biology},
+%   volume = {17},
+%   number = {11},
+%   url = {https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009501},
+%   urldate = {2021-12-09}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{steward.etal2020eys,
+%   author = {Steward, S. and Connelly, D. and Robinson, J.},
+%   year = {2020},
+%   title = {Everything You Should Know About the Coronavirus Outbreak},
+%   journal = {The Pharmaceutical Journal},
+%   url = {https://www.pharmaceutical-journal.com/news-and-analysis/features/everything-you-should-know-about-the-coronavirus-outbreak/20207629.article},
+%   urldate = {2020-04-30}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{liontou.etal2019dra,
+%   author = {Liontou, C. and Kontopodis, E. and Oikonomidis, N. and Maniotis, C. and
+%     Tassopoulos, A. and Tsiafoutis, I. and Lazaris, E. and Koutouzis, M.},
+%   year = {2019},
+%   title = {Distal Radial Access: a Review Article},
+%   journal = {Cardiovascular Revascularization Medicine},
+%   pubstate = {inpress},
+%   url = {https://www.sciencedirect.com/science/article/pii/S1553838919303367},
+%   urldate = {2019-06-19}}
+% \end{verbatim}
+% 
+% \subsubsection*{Preprint or trial study in a digital repository}
+% \begin{verbatim}
+% @report{shah.corrick2016hsc,
+%   author = {Shah, I. and Corrick, I.},
+%   year = {2016},
+%   title = {How should central banks respond to non-neutral inflation expectations?},
+%   address = {Bath},
+%   institution = {University of Bath},
+%   library = {OPUS},
+%   url = {http://opus.bath.ac.uk},
+%   urldate = {2016-05-04}}
+% \end{verbatim}
+% \begin{verbatim}
+% @report{ganju2021sed,
+%   author = {Ganju, V.},
+%   year = {2021},
+%   title = {A study of {EnGeneIC} {Dream} {Vectors} {(EDV's)} packaged with the chemotherapy,
+%     {E-EDV-D682} given simultaneously as non-targeted {EDVs} carrying an immune enhancer
+%     called {EDV-GC}, in participants with advanced pancreatic and other cancers whose disease
+%     has progressed after one or two treatment regimes, or where other standard therapies are
+%     not appropriate},
+%   address = {Sydney},
+%   institution = {University of Sydney},
+%   library = {Australian and New Zealand Clinical Trials Registry},
+%   url = {http://www.anzctr.org.au/Trial/Registration/TrialReview.aspx?id=365258},
+%   urldate = {2021-04-29}}
+% \end{verbatim}
+% 
+% \subsubsection*{Newspaper article}
+% \begin{verbatim}
+% @article{haurant2004bbh,
+%   author = {Haurant, S.},
+%   date = {2004-07-29},
+%   title = {Britain's Borrowing Hits \pounds 1 Trillion},
+%   journal = {{The Guardian}},
+%   pages = {16c}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{independent1992pub,
+%   author = {{The Independent}},
+%   date = {1992-06-04},
+%   title = {Picking Up the Bills},
+%   journal = {{The Independent}},
+%   pages = {28a}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{cogley2020ccs,
+%   author = {Cogley, M.},
+%   date = {2020-05-04},
+%   title = {Corporate Confidence Slumps to Record Low},
+%   journal = {{The Telegraph}},
+%   url = {https://www.telegraph.co.uk/business/2020/05/03/corporate-confidence-slumps-all-time-low/},
+%   urldate = {2020-05-05}}
+% \end{verbatim}
+% 
+% \subsection{Conference papers}
+% For conference proceedings, use \texttt{@inproceedings} or \texttt{@proceedings}.
+% The format mirrors edited book chapters, ensuring 'in' is lowercase without a colon.
+
+% 
+% \subsubsection*{Conference paper (when proceedings have a named editor)}
+% \begin{verbatim}
+% @inproceedings{crawford1965oim,
+%   author = {Crawford, G. I.},
+%   year = {1965},
+%   title = {Oxygen in Metals},
+%   editor = {J. M. A. Lenihan and S. J. Thompson},
+%   booktitle = {Activation Analysis},
+%   booksubtitle = {Proceedings of a {NATO} {Advanced} {Study} {Institute}},
+%   eventdate = {1964-08-02/1964-08-04},
+%   venue = {Glasgow},
+%   address = {London},
+%   publisher = {Academic Press},
+%   pages = {113-118}}
+% \end{verbatim}
+% 
+% \subsubsection*{Conference paper (when proceedings have no named editor or are part of a major series)}
+% \begin{verbatim}
+% @inproceedings{soper1972rbc,
+%   author = {Soper, D.},
+%   year = {1972},
+%   title = {Review of Bracken Control Experiments with Asulam},
+%   booktitle = {Proceedings of the 11th {British} {Weed} {Control} {Conference}},
+%   eventdate = {1972-11-15/1972-11-17},
+%   venue = {Brighton},
+%   address = {Brighton},
+%   publisher = {University of Sussex},
+%   pages = {24-31}}
+% \end{verbatim}
+% 
+% \subsection{Grey literature}
+% For working papers and institutional reports, use \texttt{@report} or \texttt{@unpublished}.
+% For academic theses, use \texttt{@thesis}. Titles are strictly italicized.
+
+% 
+% \subsubsection*{Thesis/dissertation}
+% \begin{verbatim}
+% @thesis{burrell1973ist,
+%   author = {Burrell, J. G.},
+%   year = {1973},
+%   title = {The Importance of School Tours in Education},
+%   type = {Thesis \parentext{M.A.}},
+%   school = {Queen's University, Belfast}}
+% \end{verbatim}
+% 
+% \subsubsection*{Report, working paper, or research briefing}
+% \begin{verbatim}
+% @report{unesco1993gip,
+%   author = {{UNESCO}},
+%   year = {1993},
+%   title = {General Information Programme and {UNISIST}},
+%   address = {Paris},
+%   institution = {UNESCO},
+%   number = {PGI-93/WS/22}}
+% \end{verbatim}
+% \begin{verbatim}
+% @techreport{bre2007dqb,
+%   author = {{BRE}},
+%   year = {2007},
+%   title = {Designing Quality Buildings: a {BRE} Guide},
+%   address = {Bracknell},
+%   institution = {BRE},
+%   type = {Report},
+%   number = {497}}
+% \end{verbatim}
+% \begin{verbatim}
+% @report{deneulin.dinerstein2010hms,
+%   author = {Deneulin, S. and Dinerstein, A. C.},
+%   year = {2010},
+%   title = {Hope Movements: Social Movements in the Pursuit of Human Development},
+%   address = {Bath},
+%   institution = {University of Bath},
+%   series = {Bath Papers in International Development and Wellbeing},
+%   number = {no.~8}}
+% \end{verbatim}
+% \begin{verbatim}
+% @report{who1986nde,
+%   author = {{World Health Organization}},
+%   shortauthor = {WHO},
+%   title = {Nutrition and Development in {East Africa}},
+%   year = {1986},
+%   address = {Geneva},
+%   institution = {WHO}}
+% \end{verbatim}
+% 
+% \subsubsection*{Standard}
+% \begin{verbatim}
+% @standard{bs5605:1990,
+%   author = {{BSI}},
+%   year = {1990},
+%   title = {{BS}~5605:1990 {Recommendations} for Citing and Referencing Published Material},
+%   address = {London},
+%   organization = {BSI}}
+% \end{verbatim}
+% \begin{verbatim}
+% @standard{astm.d1655,
+%   author = {{ASTM}},
+%   year = {2019},
+%   title = {{ASTM~D1655} - 19 {Standard} Specification for Aviation Turbine Fuels},
+%   address = {West Conshohocken, Pa.},
+%   organization = {ASTM}}
+% \end{verbatim}
+% 
+% \subsubsection*{Patent}
+% \begin{verbatim}
+% @patent{pm1981opa,
+%   author = {{Phillipp Morris Inc.}},
+%   year = {1981},
+%   title = {Optical perforating apparatus and system},
+%   type = {European patent application},
+%   number = {0021165A1. 1981-01-07}}
+% \end{verbatim}
+% 
+% \subsubsection*{Unpublished written material and personal communications}
+% \begin{verbatim}
+% @unpublished{harris2013fgr,
+%   author = {Harris, G.},
+%   year = {2013},
+%   title = {Focus group recommendations: internal task group report}}
+% \end{verbatim}
+% \begin{verbatim}
+% @unpublished{hadley2015bir,
+%   author = {Hadley, S.},
+%   year = {2015},
+%   title = {Biomechanics: introductory reading, {BM289}: sport biomechanics},
+%   howpublished = {University of Bath}}
+% \end{verbatim}
+% \begin{verbatim}
+% @unpublished{thomas2015wcr,
+%   author = {Thomas, D.},
+%   year = {2015},
+%   title = {Word count and referencing style},
+%   booktitle = {Frequently asked questions discussion board: {PHYS} 2011: housing studies},
+%   howpublished = {University of Bath}}
+% \end{verbatim}
+% 
+% \subsection{Audiovisual materials}
+% For videos and films, use the \texttt{@video} entry type. 
+% The format appends the medium descriptor \texttt{[Video]} after the title.
+
+% 
+% \subsubsection*{Image}
+% \begin{verbatim}
+% @image{nasa2015nat,
+%   author = {{NASA}},
+%   year = {2015},
+%   title = {{NASA} Astronaut {Tim} {Kopra} on {Dec.\@} 21 Spacewalk},
+%   address = {Washington},
+%   publisher = {NASA},
+%   url = {http://www.nasa.gov/image-feature/nasa-astronaut-tim-kopra-on-dec-21-spacewalk},
+%   urldate = {2015-01-07}}
+% \end{verbatim}
+% \begin{verbatim}
+% @image{iliff2006rcb,
+%   author = {D. Iliff},
+%   year = {2006},
+%   title = {{Royal} {Crescent} in {Bath,} {England} - {July} 2006},
+%   address = {San Francisco},
+%   organization = {Wikimedia Foundation},
+%   url = {https://commons.wikimedia.org/wiki/File:Royal_Crescent_in_Bath,_England_-_July_2006.jpg},
+%   urldate = {2016-01-07}}
+% \end{verbatim}
+% \begin{verbatim}
+% @image{brbr1965gph,
+%   author = {{Bristol Region Building Record}},
+%   year = {1965},
+%   title = {{Green} {Park} {House} (since demolished), viewed from southwest},
+%   entrysubtype = {Photograph},
+%   number = {BRBR, D/877/1},
+%   library = {Archives \& Research Collections, University of Bath Library}}
+% \end{verbatim}
+% 
+% \subsubsection*{Map}
+% \begin{verbatim}
+% @manual{andrews.dury1773wilts,
+%   author = {Andrews, J. and Dury, A.},
+%   year = {1773},
+%   title = {Map of {Wiltshire}},
+%   series = {1 inch to 2 miles},
+%   address = {Devizes},
+%   publisher = {Wiltshire Record Society}}
+% \end{verbatim}
+% \begin{verbatim}
+% @manual{os2020bath,
+%   author = {{Ordnance Survey}},
+%   year = {2020},
+%   title = {Street view map of {University of Bath}},
+%   series = {1:5000, {OS VectorMap® Local}},
+%   url = {https://digimap.edina.ac.uk/roam/map/os},
+%   urldate = {2020-04-30}}
+% \end{verbatim}
+% \begin{verbatim}
+% @manual{google2020harbourside,
+%   author = {{Google}},
+%   year = {2020},
+%   title = {{Harbourside, Bristol}},
+%   series = {{Google Maps}},
+%   url = {https://www.google.co.uk/maps/place/Harbourside,+Bristol/},
+%   urldate = {2020-04-30}}
+% \end{verbatim}
+% 
+% \subsubsection*{Film, video or DVD}
+% \begin{verbatim}
+% @video{macbeth1948,
+%   year = {1948},
+%   title = {Macbeth},
+%   type = {Film},
+%   note = {Directed by Orson Welles},
+%   address = {USA},
+%   publisher = {Republic Pictures}}
+% \end{verbatim}
+% \begin{verbatim}
+% @video{elephant-man1980,
+%   year = {1980},
+%   title = {The elephant man},
+%   type = {Film},
+%   note = {Directed by David Lynch},
+%   address = {USA},
+%   publisher = {Brooksfilms},
+%   library = {BBC iPlayer},
+%   urldate = {2021-05-04}}
+% \end{verbatim}
+% 
+% \subsubsection*{Online video\slash audio}
+% \begin{verbatim}
+% @video{moran2016sol,
+%   author = {Moran, C.},
+%   year = {2016},
+%   title = {Save Our Libraries},
+%   url = {https://youtu.be/gKTfCz4JtVE},
+%   urldate = {2016-04-29}}
+% \end{verbatim}
+% \begin{verbatim}
+% @audio{chakrabarti2016hac,
+%   author = {Chakrabarti, V.},
+%   year = {2016},
+%   title = {How Architecture and City Planning Can Combat Social Inequality},
+%   url = {https://www.curbed.com/2016/5/5/11593058/vishaan-chakrabarti-pau-curbed-appeal-podcast},
+%   urldate = {2019-03-28}}
+% \end{verbatim}
+% 
+% \subsubsection*{Television or radio broadcast}
+% \begin{verbatim}
+% @video{inn2021huw,
+%   date = {2021-05-31T21:30:00},
+%   title = {Hurry up and wait},
+%   series = {Inside No.9},
+%   number = {{Episode} 6:4},
+%   type = {TV},
+%   publisher = {BBC2}}
+% \end{verbatim}
+% \begin{verbatim}
+% @video{rsfo2006ep5,
+%   date = {2006-08-23T20:30:00},
+%   title = {Rick {Stein's} {French} Odyssey},
+%   subtitle = {{Episode} 5},
+%   type = {TV},
+%   publisher = {BBC2}}
+% \end{verbatim}
+% \begin{verbatim}
+% @audio{archers20060823,
+%   date = {2006-08-23T19:02:00},
+%   title = {The {Archers}},
+%   type = {Radio},
+%   publisher = {BBC Radio 4}}
+% \end{verbatim}
+% \begin{verbatim}
+% @video{tkmmm2020ts,
+%   year = {2020},
+%   title = {The Secret},
+%   series = {Tiger King: Murder, Mayhem and Madness},
+%   number = {{Episode} 3},
+%   type = {TV},
+%   library = {Netflix},
+%   urldate = {2021-05-04}}
+% \end{verbatim}
+% 
+% \subsubsection*{Music score}
+% \begin{verbatim}
+% @book{beethoven1950symph1,
+%   author = {Ludwig van Beethoven},
+%   year = {1950},
+%   title = {Symphony no.1 in {C,} {Op.21}},
+%   address = {Harmondsworth},
+%   publisher = {Penguin}}
+% \end{verbatim}
+% 
+% \subsection{Digital media}
+% For webpages and online resources, use the \texttt{@online} entry type. 
+% The format is: \texttt{Author (Year) \emph{Title}, Available at: URL (Accessed: Date).}
+% Datasets use the \texttt{@dataset} type and append \texttt{[Dataset]}.
+
+% 
+% \subsubsection*{Website or webpage}
+% \begin{verbatim}
+% @online{who2018ttc,
+%   author = {{World Health Organization}},
+%   year = {2018},
+%   title = {The Top 10 Causes of Death},
+%   address = {Geneva},
+%   organization = {World Health Organization},
+%   url = {https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death},
+%   urldate = {2020-06-29}}
+% \end{verbatim}
+% \begin{verbatim}
+% @online{manco2013va,
+%   author = {Manco, J.},
+%   year = {2013},
+%   title = {Vernacular Architecture},
+%   url = {https://www.buildinghistory.org/style/vernacular.shtml},
+%   urldate = {2020-02-20},
+%   pagination = {paragraph}}
+% \end{verbatim}
+% \begin{verbatim}
+% @online{copilot2026wcr,
+%   author = {{Copilot}},
+%   year = {2026},
+%   title = {Why is Citing and Referencing Your Sources Important?},
+%   address = {Redmond, Washington},
+%   organization = {Microsoft},
+%   url = {https://copilot.microsoft.com/chats/wxaHkx69Qt4SDuNDAkbCT},
+%   urldate = {2026-01-19}}
+% \end{verbatim}
+% 
+% \subsubsection*{Social media}
+% \begin{verbatim}
+% @online{gaiman2021fbp,
+%   author = {Gaiman, N.},
+%   date = {2021-04-21},
+%   title = {Facebook post},
+%   url = {https://www.facebook.com/neilgaiman/posts/305187897642814},
+%   urldate = {2021-05-13}}
+% \end{verbatim}
+% \begin{verbatim}
+% @online{ublib2021tp,
+%   author = {{Library at University of Bath}},
+%   nameaddon = {@bathunilibrary},
+%   date = {2021-05-10},
+%   title = {Twitter post},
+%   url = {https://twitter.com/BathUniLibrary/status/1391774402618998795?s=20},
+%   urldate = {2021-05-12}}
+% \end{verbatim}
+% \begin{verbatim}
+% @online{ublib2021ip,
+%   author = {{University of Bath Library}},
+%   nameaddon = {@unibathlib},
+%   date = {2021-03-15},
+%   title = {Instagram post},
+%   url = {https://www.instagram.com/p/CMb5GHjFv9A/?utm_source=ig_web_copy_link},
+%   urldate = {2021-05-07}}
+% \end{verbatim}
+% 
+% \subsubsection*{Email discussion list}
+% \begin{verbatim}
+% @letter{clark2004euk,
+%   author = {Clark, T.},
+%   date = {2004-07-05},
+%   title = {A {European} {UK} {Libraries} {Plus}?},
+%   journal = {Lis-link},
+%   url = {lis-link@jiscmail.ac.uk},
+%   urldate = {2004-07-30}}
+% \end{verbatim}
+% 
+% \subsubsection*{Database}
+% \begin{verbatim}
+% @dataset{bvd2008bt,
+%   author = {{Bureau van Dijk}},
+%   year = {2008},
+%   title = {{BT} {Group} PLC Company Report},
+%   library = {FAME},
+%   address = {London},
+%   publisher = {Bureau van Dijk},
+%   url = {http://www.portal.euromonitor.com},
+%   urldate = {2014-11-06}}
+% \end{verbatim}
+% 
+% \subsubsection*{Dataset}
+% \begin{verbatim}
+% @dataset{wilson2013rgc,
+%   author = {Wilson, D.},
+%   year = {2013},
+%   title = {Real Geometry and Connectedness via Triangular Description},
+%   subtitle = {{CAD} Example Bank},
+%   address = {Bath},
+%   publisher = {University of Bath},
+%   doi = {10.15125/BATH-00069},
+%   urldate = {2016-04-20}}
+% \end{verbatim}
+% 
+% \subsubsection*{Computer program}
+% \begin{verbatim}
+% @software{screencasto,
+%   author = {@screencasto},
+%   title = {{Screencast-O-Matic}},
+%   version = {2},
+%   entrysubtype = {computer program},
+%   url = {https://screencast-o-matic.com/},
+%   urldate = {2016-05-16}}
+% \end{verbatim}
+% 
+% \subsection{Works in languages other than English}
+% 
+% \subsubsection*{Work in translation}
+% \begin{verbatim}
+% @book{aristotle2007ne,
+%   author = {Aristotle},
+%   year = {2007},
+%   title = {Nicomachean Ethics},
+%   translator = {W. D. Ross},
+%   address = {South Dakota},
+%   publisher = {NuVisions}}
+% \end{verbatim}
+% 
+% \subsubsection*{Work in the Roman alphabet}
+% \begin{verbatim}
+% @book{esquivel2003cap,
+%   author = {Esquivel, L.},
+%   year = {2003},
+%   title = {Como Agua para Chocolate},
+%   titleaddon = {Like water for chocolate},
+%   address = {Barcelona},
+%   publisher = {Debolsillo}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{thurfjell1975vhv,
+%   author = {Thurfjell, W.},
+%   year = {1975},
+%   title = {Vart har våran doktor tagit vägen?},
+%   titleaddon = {Where has our doctor gone?},
+%   journal = {Läkartidningen},
+%   volume = {72},
+%   pages = {789}}
+% \end{verbatim}
+% 
+% \subsubsection*{Work in a non-Roman alphabet}
+% \begin{verbatim}
+% @article{hua1999qys1,
+%   author = {given=Linfu, family=Hua, cjk=華林甫},
+%   year = {1999},
+%   title = {Qingdai yilai {Sanxia} diqu shuihan zaihai de chubu yanjiu
+%     {清代以來三峽地區水旱災害的初步硏}},
+%   titleaddon = {A preliminary study of floods and droughts in the {Three} {Gorges} region since
+%     the {Qing} dynasty},
+%   journal = {Zhongguo shehui kexue \emph{中國社會科學}},
+%   volume = {1},
+%   pages = {168-79}}
+% \end{verbatim}
+% \begin{verbatim}
+% @article{hua1999qys2,
+%   author = {Hua, Linfu},
+%   year = {1999},
+%   title = {Qingdai yilai {Sanxia} diqu shuihan zaihai de chubu yanjiu},
+%   titleaddon = {A preliminary study of floods and droughts in the {Three} {Gorges} region since
+%     the {Qing} dynasty},
+%   journal = {Zhongguo shehui kexue},
+%   volume = {1},
+%   pages = {168-79}}
+% \end{verbatim}
+% \begin{verbatim}
+% @book{hua2001foo,
+%   author = {given=Linfu, family=Hua, cjk=華林甫},
+%   author+an = {1=cjk},
+%   year = {2001},
+%   title = {Lorem ipsum}}
+% \end{verbatim}
+% \begin{verbatim}
+% @book{pamporov2006rvb,
+%   author = {Pamporov, A.},
+%   year = {2006},
+%   title = {Romskoto vsekidnevie v {Balgariya}},
+%   titleaddon = {Roma everyday life in Bulgaria},
+%   address = {Veliko Tarnovo},
+%   publisher = {Faber}}
+% \end{verbatim}
+% 
+% \subsection{Government and parliamentary document}
+% 
+% \subsubsection*{House of Commons paper}
+% \begin{verbatim}
+% @report{gb.hc2003/04-30,
+%   author = {{Great Britain. Parliament. House of Commons}},
+%   year = {2004},
+%   title = {National {Savings} Investment Deposits},
+%   subtitle = {Account 2002--2003},
+%   address = {London},
+%   publisher = {National Audit Office},
+%   series = {{HC} 2003/04},
+%   number = {30}}
+% \end{verbatim}
+% 
+% \subsubsection*{House of Lords paper}
+% \begin{verbatim}
+% @report{gb.hl1986/87-66,
+%   author = {{Great Britain. Parliament. House of Lords}},
+%   year = {1987},
+%   title = {Social Fund (Maternity and Funeral Expenses) Bill},
+%   address = {London},
+%   publisher = {HMSO},
+%   series = {{HL} 1986/87},
+%   number = {66}}
+% \end{verbatim}
+% 
+% \subsubsection*{Command paper}
+% \begin{verbatim}
+% @report{gb.cm6041,
+%   author = {{Great Britain. Ministry of Defence}},
+%   year = {2004},
+%   title = {Delivering Security in a Changing World},
+%   subtitle = {Defence White Paper},
+%   address = {London},
+%   publisher = {TSO},
+%   series = {Cm},
+%   number = {6041}}
+% \end{verbatim}
+% 
+% \subsubsection*{House of Commons\slash House of Lords bill}
+% \begin{verbatim}
+% @legislation{gb.bill1987/88-66,
+%   author = {{Great Britain. Parliament. House of Commons}},
+%   year = {1988},
+%   title = {Local Government Finance Bill},
+%   address = {London},
+%   publisher = {HMSO},
+%   series = {{Bills | 1987/88}},
+%   number = {66}}
+% \end{verbatim}
+% 
+% \subsubsection*{Act of Parliament (UK Statutes) before 1963}
+% \begin{verbatim}
+% @legislation{gb.wa1735,
+%   title = {Witchcraft {Act}},
+%   year = {1735},
+%   series = {9 Geo.2},
+%   chapter = {5}}
+% \end{verbatim}
+% 
+% \subsubsection*{Act of Parliament (UK Statutes) 1963 onwards}
+% \begin{verbatim}
+% @legislation{gb.pa2014,
+%   title = {Pensions {Act}},
+%   year = {2014},
+%   chapter = {19},
+%   address = {London},
+%   publisher = {TSO}}
+% \end{verbatim}
+% 
+% \subsubsection*{Statutory instrument}
+% \begin{verbatim}
+% @legislation{gb.hmr2012,
+%   entrysubtype = {secondary},
+%   title = {The {Human} {Medicines} {Regulations}},
+%   year = {2012},
+%   number = {No.1916},
+%   address = {United Kingdom},
+%   publisher = {HMSO},
+%   url = {http://www.legislation.gov.uk/uksi/2012/1916/contents},
+%   urldate = {2021-04-22}}
+% \end{verbatim}
+% 
+% \subsubsection*{Parliamentary debate}
+% \begin{verbatim}
+% @legal{gb.hc2024rpc,
+%   entrysubtype = {parliamentary},
+%   author = {{Great Britain. Parliament. House of Commons}},
+%   year = {2024},
+%   title = {{Rwanda Plan Cost and Asylum System}},
+%   journal = {Hansard},
+%   volume = {744},
+%   eventdate = {2024-01-09},
+%   url = {https://hansard.parliament.uk/Commons/2024-01-09/debates/57105D77-72DE-4246-9F6E-ED87FCB9A088/RwandaPlanCostAndAsylumSystem},
+%   urldate = {2024-12-12}}
+% \end{verbatim}
+% 
+% \subsection{Legal document: EU reports\slash legislation}
+% For legislation and statutes, use \texttt{@legislation}.
+% The standard author/year block is suppressed since the year is included in the Act's title.
+% Titles are NOT italicized.
+
+% 
+% \subsubsection*{EU publication}
+% \begin{verbatim}
+% @report{ec2015gra,
+%   author = {{European Commission}},
+%   year = {2015},
+%   title = {General Report on the Activities of the {European} {Union} 2014},
+%   address = {Luxembourg},
+%   publisher = {Publications Office of the European Union}}
+% \end{verbatim}
+% 
+% \subsubsection*{EU regulation or directive, decision, recommendation or opinion}
+% \begin{verbatim}
+% @legislation{eu.dir1984/2003,
+%   title = {Council {Regulation} ({EC}) 1984/2003 of 8 {April} 2003 Introducing a System for
+%     the Statistical Monitoring of Trade in Bluefin Tuna, Swordfish and Big Eye Tuna within
+%     the {Community}},
+%   shorttitle = {Council {Regulation} \parentext{EC} 1984/2003},
+%   year = {2003},
+%   journal = {OJ},
+%   series = {L},
+%   volume = {295}}
+% \end{verbatim}
+% 
+% \subsection{Legal document: case reports}
+% For legal cases, use \texttt{@jurisdiction}. 
+
+% 
+% \subsubsection*{Judgment of the European Court of Justice}
+% \begin{verbatim}
+% @jurisdiction{srl.etal-v-comm2005,
+%   title = {Alessandrini {Srl} and others v. {Commission}},
+%   number = {C-295/03 P},
+%   year = {2005},
+%   journal = {ECR},
+%   volume = {I},
+%   pages = {5700}}
+% \end{verbatim}
+% 
+% \subsubsection*{Legal case study}
+% \begin{verbatim}
+% @jurisdiction{seldon-v-c.w.j2009,
+%   title = {Seldon v~{Clarkson} {Wright} \& {Jakes}},
+%   year = {2009},
+%   institution = {{England and Wales Court of Appeal (Civil Division)}},
+%   number = {889},
+%   journal = {Bailii},
+%   url = {http://www.bailii.org/ew/cases/EWCA/Civ/2009/889.html},
+%   urldate = {2024-04-23}}
+% \end{verbatim}
+% \begin{verbatim}
+% @jurisdiction{braceurself-v-nhs.england2013,
+%   title = {{Braceurself} {Ltd} v~{NHS} {England}},
+%   year = {2013},
+%   institution = {{England and Wales Court of Appeal (Civil Division)}},
+%   number = {39},
+%   journal = {Construction law reports},
+%   volume = {212},
+%   pages = {95-135}}
+% \end{verbatim}
+% \begin{verbatim}
+% @jurisdiction{seldon-v-c.w.j2012,
+%   title = {Seldon v~{Clarkson} {Wright} \& {Jakes}},
+%   year = {2012},
+%   journal = {UKSC},
+%   pages = {16}}
+% \end{verbatim}
+% \nocite{*}
+% \printbibliography
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+% \subsection{Bibliography Style}
+%<*bbx>
+%    \begin{macrocode}
+%%
+%% This is file `harvard-warwick.bbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `bbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.bbx}
+    [\Version\space Bibliography style for Warwick Economics (Harvard)]
+
+%%
+%% This is file `harvard-warwick.bbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `bbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.bbx}
+    [\Version\space Bibliography style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.bbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `bbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.bbx}
+    [\Version\space Bibliography style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.bbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `bbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.bbx}
+    [\Version\space Bibliography style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.bbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `bbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.bbx}
+    [\Version\space Bibliography style for Warwick Economics (Harvard)]
+\ProvidesFile{harvard-warwick.bbx}
+[2017/12/24 v0.1.0 biblatex Cite Them Right Harvard-Warwick bibliography style]
+
+\RequireBibliographyStyle{standard}
+
+\newtoggle{bbx:v12}
+\DeclareBibliographyOption[boolean]{v12}[true]{\settoggle{bbx:v12}{#1}}
+
+\DeclareBibliographyOption[boolean]{dashed}[true]{%
+  \ifstrequal{#1}{true}
+    {\ExecuteBibliographyOptions{pagetracker}%
+     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
+    {\renewbibmacro*{bbx:savehash}{}}}
+
+\DeclareBibliographyOption[boolean]{mergedate}[true]{%
+  \ifcsdef{bbx@opt@mergedate@#1}
+    {\csuse{bbx@opt@mergedate@#1}}
+    {\PackageError{biblatex}
+       {Invalid option 'mergedate=#1'}
+       {Valid values are 'maximum', 'compact', 'basic', 'minimum',\MessageBreak
+        'true' (=compact), and 'false'.}}}
+
+\providebibmacro*{date+extrayear}{}
+
+\def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
+
+\def\bbx@opt@mergedate@maximum{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \printfield{issue}%
+         \setunit*{\addspace}%
+         \iffieldsequal{year}{labelyear}
+           {\printlabeldateextra}%
+           {\printfield{labelyear}%
+            \printfield{extrayear}}}}}%
+  \renewbibmacro*{date}{}%
+  \renewbibmacro*{issue+date}{}}
+
+\def\bbx@opt@mergedate@compact{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \iffieldsequal{year}{labelyear}
+           {\printlabeldateextra}%
+           {\printfield{labelyear}%
+            \printfield{extrayear}}}}}%
+  \renewbibmacro*{date}{}%
+  \renewbibmacro*{issue+date}{%
+    \iffieldundef{issue}
+      {}
+      {\printtext[parens]{\printfield{issue}}}%
+    \newunit}}
+
+\def\bbx@opt@mergedate@basic{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}%
+  \renewbibmacro*{date}{%
+    \iffieldundef{month}
+      {}
+      {\printdate}}%
+  \renewbibmacro*{issue+date}{%
+    \ifboolexpr{
+      test {\iffieldundef{issue}}
+      and
+      test {\iffieldundef{month}}
+    }
+      {}
+      {\printtext[parens]{%
+         \printfield{issue}%
+         \setunit*{\addspace}%
+         \printdate}}%
+    \newunit}}
+
+\def\bbx@opt@mergedate@minimum{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}%
+  \renewbibmacro*{date}{%
+    \ifboolexpr{
+      test {\iffieldundef{month}}
+      and
+      test {\iffieldundef{extrayear}}
+    }
+      {}
+      {\printdate}}%
+  \renewbibmacro*{issue+date}{%
+    \ifboolexpr{
+      test {\iffieldundef{issue}}
+      and
+      test {\iffieldundef{month}}
+      and
+      test {\iffieldundef{extrayear}}
+    }
+      {}
+      {\printtext[parens]{%
+         \printfield{issue}%
+         \setunit*{\addspace}%
+         \printdate}}%
+    \newunit}}
+
+\def\bbx@opt@mergedate@false{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}%
+  \renewbibmacro*{date}{\printdate}%
+  \renewbibmacro*{issue+date}{%
+    \printtext[parens]{%
+      \printfield{issue}%
+      \setunit*{\addspace}%
+      \printdate}%
+    \newunit}}
+
+\ExecuteBibliographyOptions{labeldateparts,sorting=nyt,pagetracker,mergedate}
+
+\DeclareFieldFormat{shorthandwidth}{#1}
+
+\DeclareFieldFormat
+  [article,inbook,incollection,inproceedings,patent]
+  {title}{`#1\isdot'}
+
+\DeclareFieldFormat[thesis,unpublished,report,online,video]{title}{\mkbibemph{#1\isdot}}
+\DeclareFieldFormat[dataset]{title}{\mkbibemph{#1} [Dataset]\isdot}
+\DeclareFieldFormat[legislation,jurisdiction]{title}{#1}
+
+\DeclareFieldFormat[misc,artwork,audio,video]{type}{\mkbibbrackets{\ifbibstring{#1}{\bibstring{#1}}{#1}}}
+\DeclareFieldFormat[misc,artwork,audio,video]{howpublished}{\mkbibbrackets{#1}}
+
+\DeclareFieldFormat{url}{\url{#1}}
+\setlength{\bibitemsep}{\baselineskip}
+\setlength{\bibhang}{0pt} % removes bibliography paragraph indentation
+
+\renewcommand*{\newunitpunct}{\addcomma\space}
+\renewcommand*{\bibinitdelim}{} % No spaces between initials e.g. A.B.
+\DeclareDelimFormat[bib]{nametitledelim}{\addspace} % Space instead of period after (Year)
+
+\renewbibmacro*{in:}{%
+  \ifentrytype{article}
+    {}
+    {\printtext{\bibstring{in}\intitlepunct}%
+     \ifboolexpr{ test {\ifentrytype{incollection}} or test {\ifentrytype{inproceedings}} }
+       {\ifnameundef{editor}
+          {}
+          {\printnames{editor}%
+           \setunit{\addspace}%
+           \usebibmacro{editorstrg}%
+           \clearname{editor}%
+           \setunit{\addcomma\space}}}
+       {}}}
+\renewcommand*{\intitlepunct}{\addspace}
+
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addcomma\space}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit}
+
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[article]{volume}{#1}
+
+\ExecuteBibliographyOptions{isbn=false, eprint=false, maxbibnames=99, maxcitenames=2, mincitenames=1}
+
+\DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
+\AtEveryBibitem{%
+  \iffieldundef{doi}
+    {}
+    {\clearfield{url}\clearfield{urlyear}\clearfield{urlmonth}\clearfield{urlday}}%
+}
+\renewbibmacro*{date+extrayear}{%
+  \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
+    {}
+    {\iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \iffieldsequal{year}{labelyear}
+           {\printlabeldateextra}%
+           {\printfield{labelyear}%
+            \printfield{extrayear}}}}}}
+
+\DeclareBibliographyAlias{artwork}{misc}
+\DeclareBibliographyAlias{audio}{misc}
+\DeclareBibliographyAlias{bill}{legislation}
+\DeclareBibliographyAlias{case}{jurisdiction}
+\DeclareBibliographyAlias{computerprogram}{software}
+\DeclareBibliographyAlias{customa}{misc}
+\DeclareBibliographyAlias{customb}{misc}
+\DeclareBibliographyAlias{customc}{misc}
+\DeclareBibliographyAlias{customd}{misc}
+\DeclareBibliographyAlias{custome}{misc}
+\DeclareBibliographyAlias{customf}{misc}
+\DeclareBibliographyAlias{dataset}{misc}
+\DeclareBibliographyAlias{film}{misc}
+\DeclareBibliographyAlias{hearing}{jurisdiction}
+\DeclareBibliographyAlias{image}{misc}
+\DeclareBibliographyAlias{interview}{misc}
+\DeclareBibliographyAlias{letter}{misc}
+\DeclareBibliographyAlias{manuscript}{unpublished}
+\DeclareBibliographyAlias{map}{misc}
+\DeclareBibliographyAlias{movie}{misc}
+\DeclareBibliographyAlias{music}{misc}
+\DeclareBibliographyAlias{presentation}{unpublished}
+\DeclareBibliographyAlias{statute}{legislation}
+\DeclareBibliographyAlias{tvbroadcast}{misc}
+\DeclareBibliographyAlias{video}{misc}
+\DeclareBibliographyAlias{legal}{legislation}
+
+\DeclareBibliographyDriver{legislation}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begrelated}%
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printlist{location}%
+  \setunit*{\addcolon\space}%
+  \printlist{publisher}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
+
+\DeclareBibliographyAlias{jurisdiction}{legislation}
+
+\DeclareNameAlias{sortname}{family-given}
+
+\DeclareNameAlias{author}{sortname}
+\DeclareNameAlias{editor}{sortname}
+\DeclareNameAlias{translator}{sortname}
+
+\DeclareLanguageMapping{english}{english-ctr}
+\DeclareLanguageMapping{british}{english-ctr}
+\DeclareLanguageMapping{american}{english-ctr}
+
+\defbibenvironment{bibliography}
+  {\list
+     {}
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+
+\defbibenvironment{shorthand}
+  {\list
+     {\printfield[shorthandwidth]{shorthand}}
+     {\setlength{\labelwidth}{\shorthandwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}%
+      \renewcommand*{\makelabel}[1]{##1\hss}}}
+  {\endlist}
+  {\item}
+
+\InitializeBibliographyStyle{\global\undef\bbx@lasthash}
+
+\newbibmacro*{bbx:savehash}{%
+  \savefield{fullhash}{\bbx@lasthash}}
+
+\newbool{bbx@inset}
+\DeclareBibliographyDriver{set}{%
+  \booltrue{bbx@inset}%
+  \entryset{}{}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
+
+\renewbibmacro*{begrelated}{%
+  \booltrue{bbx@inset}}
+
+\renewbibmacro*{endrelated}{%
+  \usebibmacro*{bbx:savehash}}
+
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\usebibmacro{bbx:savehash}%
+        \printnames{author}%
+        \iffieldundef{authortype}
+          {\setunit{\printdelim{nameyeardelim}}}
+          {\setunit{\addcomma\space}}}%
+     \iffieldundef{authortype}
+       {}
+       {\usebibmacro{authorstrg}%
+        \setunit{\printdelim{nameyeardelim}}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \usebibmacro{date+extrayear}}
+
+\renewbibmacro*{editor}{%
+  \usebibmacro{bbx:editor}{editorstrg}}
+\renewbibmacro*{editor+others}{%
+  \usebibmacro{bbx:editor}{editor+othersstrg}}
+\newbibmacro*{bbx:editor}[1]{%
+  \ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{editor}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{editor}%
+     \setunit{\printdelim{nameyeardelim}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \usebibmacro{date+extrayear}}
+
+\renewbibmacro*{translator}{%
+  \usebibmacro{bbx:translator}{translatorstrg}}
+\renewbibmacro*{translator+others}{%
+  \usebibmacro{bbx:translator}{translator+othersstrg}}
+\newbibmacro*{bbx:translator}[1]{%
+  \ifboolexpr{
+    test \ifusetranslator
+    and
+    not test {\ifnameundef{translator}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{translator}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{bbx:savehash}}%
+     \usebibmacro{translator+othersstrg}%
+     \clearname{translator}%
+     \setunit{\printdelim{nameyeardelim}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \usebibmacro{date+extrayear}}
+
+\newbibmacro*{bbx:dashcheck}[2]{%
+  \ifboolexpr{
+    test {\iffieldequals{fullhash}{\bbx@lasthash}}
+    and
+    not test \iffirstonpage
+    and
+    (
+       not bool {bbx@inset}
+       or
+       test {\iffieldequalstr{entrysetcount}{1}}
+    )
+  }
+    {#1}
+    {#2}}
+
+\newbibmacro*{labeltitle}{%
+  \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
+    {}
+    {\iffieldundef{label}
+      {\iffieldundef{shorttitle}
+         {\printfield{title}%
+          \clearfield{title}}
+         {\printfield[title]{shorttitle}}}
+      {\printfield{label}}}}
+
+\DeclareFieldFormat[aigenerated]{title}{#1}
+
+\DeclareBibliographyDriver{aigenerated}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printdate
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+  \newunit\newblock
+  \usebibmacro{finentry}
+}
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.bbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.bbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.bbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.bbx'.
+
+%% 
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.bbx'.
+
+\iftoggle{bbx:v12}
+  {}
+  {\AtEveryBibitem{\ifentrytype{book}{\clearlist{location}}{}}}
+
+%    \end{macrocode}
+%</bbx>
+% \subsection{Citation Style}
+%<*cbx>
+%    \begin{macrocode}
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
+
+%% 
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
+
+%    \end{macrocode}
+%</cbx>
+% \subsection{Localization Strings}
+%<*lbx>
+%    \begin{macrocode}
+%%
+%% This is file `english-warwick.lbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `lbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{english-warwick.lbx}
+    [\Version\space English conventions for Warwick Economics (Harvard)]
+
+%%
+%% This is file `english-warwick.lbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `lbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{english-warwick.lbx}
+    [\Version\space English conventions for Warwick Economics (Harvard)]
+%%
+%% This is file `english-warwick.lbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `lbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{english-warwick.lbx}
+    [\Version\space English conventions for Warwick Economics (Harvard)]
+%%
+%% This is file `english-warwick.lbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `lbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{english-warwick.lbx}
+    [\Version\space English conventions for Warwick Economics (Harvard)]
+%%
+%% This is file `english-warwick.lbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `lbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{english-warwick.lbx}
+    [\Version\space English conventions for Warwick Economics (Harvard)]
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `english-warwick.lbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `english-warwick.lbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `english-warwick.lbx'.
+
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `english-warwick.lbx'.
+
+%% 
+%% Copyright (C) 2026
+%%
+%% End of file `english-warwick.lbx'.
+
+%    \end{macrocode}
+%</lbx>
+% \subsection{Test Bibliography}
+%<*bib>
+@book{adams2009tc1,
+  author = {Adams, Gomez},
+  year = {2009},
+  title = {Test Citation One},
+  address = {London},
+  publisher = {Imperial College Press}}
+@book{adams2014tc2,
+  author = {Adams, Gomez},
+  year = {2014},
+  title = {Test Citation Two},
+  address = {Oxford},
+  publisher = {Oxford University Press}}
+@book{adams2017tc3,
+  author = {Adams, Gomez},
+  year = {2017},
+  title = {Test Citation Three},
+  address = {Cambridge},
+  publisher = {Cambridge University Press}}
+@book{jonesNDa,
+  author = {Jones, John Walter},
+  title = {Dyfyniad prawf},
+  address = {Caernarfon},
+  publisher = {Bwrdd yr Iaith Gymraeg}}
+@book{jonesNDb,
+  author = {Jones, John Walter},
+  title = {Test citation},
+  address = {Cardiff},
+  publisher = {Welsh Language Board}}
+@book{wang2018tc,
+  author = {Wang, John},
+  title = {Test Citation Four},
+  year = {2018},
+  address = {New York},
+  publisher = {Random House}}
+@book{wang2020tc,
+  author = {Wang, Kathy},
+  title = {Test Citation Five},
+  year = {2020},
+  address = {New York},
+  publisher = {Random House}}
+@book{wang.etal2002tc6,
+  author = {Wang, John and Jones, John Walter and Stacey, D. and Rogers, T.},
+  title = {Test Six},
+  year = {2002},
+  address = {Bath},
+  publisher = {Really Decent Books}}
+@book{wang.etal2002tc7,
+  author = {Wang, Kathy and Bloggs, C. and Reilly, T. and Luscott, M.},
+  title = {Test Seven},
+  year = {2002},
+  address = {Bath},
+  publisher = {Really Decent Books}}
+@book{smith.etal2020tc8,
+  author = {Smith, R. and Taylor, C. and Rogers, T. and Wang, D.},
+  title = {Test Eight},
+  year = {2020},
+  address = {Bath},
+  publisher = {Bath Publishing}}
+@book{smith.etal2020tc9,
+  author = {Smith, R. and Jones, John Walter and Stacey, D. and Lee, J.},
+  title = {Test Nine},
+  year = {2020},
+  address = {Bath},
+  publisher = {Bath Publishing}}
+
+%</bib>
+% \Finale

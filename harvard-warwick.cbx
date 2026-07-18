@@ -1,170 +1,123 @@
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
 \ProvidesFile{harvard-warwick.cbx}
-[2017/12/24 v0.1.0 biblatex Cite Them Right Harvard-Warwick citation style]
-
-\ExecuteBibliographyOptions{labeldateparts,uniquename, giveninits, uniquelist,autocite=inline, dashed=false, urldate=long, dateabbrev=false, maxcitenames=2, mincitenames=1, maxbibnames=99}
-
-\renewcommand*{\iffinalcitedelim}{\iflastcitekey}
-\renewcommand*{\nameyeardelim}{\addcomma\space}
-
-\newbool{cbx:parens}
-
-\newbibmacro*{cite}{%
-  \iffieldundef{shorthand}
-    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-       {\usebibmacro{cite:label}%
-        \setunit{\printdelim{nonameyeardelim}}}
-       {\printnames{labelname}%
-        \setunit{\printdelim{nameyeardelim}}}%
-     \usebibmacro{cite:labelyear+extrayear}}
-    {\usebibmacro{cite:shorthand}}}
-
-\newbibmacro*{citeyear}{%
-  \iffieldundef{shorthand}
-    {\iffieldundef{labelyear}
-       {\usebibmacro{cite:label}}
-       {\usebibmacro{cite:labelyear+extrayear}}}
-    {\usebibmacro{cite:shorthand}}}
-
-\newbibmacro*{textcite}{%
-  \ifnameundef{labelname}
-    {\iffieldundef{shorthand}
-       {\usebibmacro{cite:label}%
-        \setunit{%
-          \global\booltrue{cbx:parens}%
-          \printdelim{nonameyeardelim}\bibopenparen}%
-        \ifnumequal{\value{citecount}}{1}
-          {\usebibmacro{prenote}}
-          {}%
-        \usebibmacro{cite:labelyear+extrayear}}
-       {\usebibmacro{cite:shorthand}}}
-    {\printnames{labelname}%
-     \setunit{%
-       \global\booltrue{cbx:parens}%
-       \printdelim{nameyeardelim}\bibopenparen}%
-     \ifnumequal{\value{citecount}}{1}
-       {\usebibmacro{prenote}}
-       {}%
-     \usebibmacro{citeyear}}}
-
-\newbibmacro*{cite:shorthand}{%
-  \printtext[bibhyperref]{\printfield{shorthand}}}
-
-\newbibmacro*{cite:label}{%
-  \iffieldundef{label}
-    {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
-    {\printtext[bibhyperref]{\printfield{label}}}}
-
-% Inside \printtext, argumentless macros also need '%' afterwards
-% otherwise the newlines are spaces
-\newbibmacro*{cite:labelyear+extrayear}{%
-  \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
-    {}
-    {\iffieldundef{labelyear}
-      {}
-    {\printtext[bibhyperref]{%
-     \ifdefstring\blx@dateformat@labeldate{edtf}
-       {}
-       {\datecircaprint}%
-     \dateeraprintpre{labelyear}%
-     \printfield{labelyear}%
-     \printfield{extrayear}%
-     \dateuncertainprint%
-     \iffieldsequal{labeldateera}{labelenddateera}{}
-       {\dateeraprint{labelyear}}%
-     \ifdefstring\blx@dateformat@labeldate{edtf}
-       {\datecircaprintedtf}
-       {}%
-     \iffieldundef{labelendyear}
-       {}
-       {\iffieldsequal{labelyear}{labelendyear}{}
-        {\ifdefstring\blx@dateformat@labeldate{edtf}
-          {\slash}% strict EDTF
-          {\bibdaterangesep
-           \enddatecircaprint}%
-         \dateeraprintpre{labelendyear}%
-         \printfield{labelendyear}%
-         \enddateuncertainprint
-         \ifdefstring\blx@dateformat@labeldate{edtf}
-           {\enddatecircaprintedtf}
-           {}%
-         \dateeraprint{labelendyear}}}}}}}
-
-\newbibmacro*{textcite:postnote}{%
-  \iffieldundef{postnote}
-    {\ifbool{cbx:parens}
-       {\bibcloseparen}
-       {}}
-    {\ifbool{cbx:parens}
-       {\setunit{\postnotedelim}}
-       {\setunit{\extpostnotedelim\bibopenparen}}%
-     \printfield{postnote}\bibcloseparen}}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
 
 
-\DeclareCiteCommand{\cite}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-	\printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-	{\usebibmacro{postnote}}
 
 
-\DeclareCiteCommand*{\cite}
-	{\usebibmacro{prenote}}
-	{\usebibmacro{citeindex}%
-	\printtext[bibhyperref]{\usebibmacro{citeyear}}}
-	{\multicitedelim}
-	{\usebibmacro{postnote}}
 
 
-\DeclareCiteCommand{\parencite}[\mkbibparens]
-	{\usebibmacro{prenote}}
-	{\usebibmacro{citeindex}%
-	\printtext[bibhyperref]{\usebibmacro{cite}}}
-	{\multicitedelim}
-	{\usebibmacro{postnote}}
 
 
-\DeclareCiteCommand*{\parencite}[\mkbibparens]
-	{\usebibmacro{prenote}}
-	{\usebibmacro{citeindex}%
-	\printtext[bibhyperref]{\usebibmacro{citeyear}}}
-	{\multicitedelim}
-	{\usebibmacro{postnote}}
 
-\DeclareCiteCommand{\footcite}[\mkbibfootnote]
-	{\usebibmacro{prenote}}
-	{\usebibmacro{citeindex}%
-	\printtext[bibhyperref]{ \usebibmacro{cite}}}
-	{\multicitedelim}
-	{\usebibmacro{postnote}}
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
 
-\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
-	{\usebibmacro{prenote}}
-	{\usebibmacro{citeindex}%
-	\printtext[bibhyperref]{\usebibmacro{cite}}}
-	{\multicitedelim}
-	{\usebibmacro{postnote}}
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% This is file `harvard-warwick.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% harvard-warwick.dtx  (with options: `cbx')
+%% ----------------------------------------------------------------
+%% harvard-warwick --- Warwick Economics Harvard referencing style
+%% ----------------------------------------------------------------
+\def\Version{2026/07/18 v13.0.0}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesFile{harvard-warwick.cbx}
+    [\Version\space Citation style for Warwick Economics (Harvard)]
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
 
-\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
 
-\DeclareCiteCommand{\textcite}
-  {\boolfalse{cbx:parens}}
-  {\usebibmacro{citeindex}%
-   \iffirstcitekey
-     {\setcounter{textcitetotal}{1}}
-     {\stepcounter{textcitetotal}%
-      \textcitedelim}%
-   \printtext[bibhyperref]{\usebibmacro{textcite}}}
-  {\ifbool{cbx:parens}
-     {\bibcloseparen\global\boolfalse{cbx:parens}}
-     {}}
-  {\usebibmacro{textcite:postnote}}
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
 
-\DeclareMultiCiteCommand{\textcites}{\textcite}{}
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
 
-\endinput
+%%
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
+
+%% 
+%% Copyright (C) 2026
+%%
+%% End of file `harvard-warwick.cbx'.
