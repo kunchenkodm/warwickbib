@@ -419,4 +419,21 @@
 
 
 
+% --- Cite Them Right 13th Edition AI-Generated Content ---
+\DeclareFieldFormat[aigenerated]{title}{#1}
+
+\DeclareBibliographyDriver{aigenerated}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printdate
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+  \newunit\newblock
+  \usebibmacro{finentry}
+}
+
 \endinput
