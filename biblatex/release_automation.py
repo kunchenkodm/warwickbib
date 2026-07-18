@@ -10,30 +10,42 @@ def run(cmd):
 run("make distclean")
 run("make all")
 
-# Package standard CTR release
-ctr_zip = "../releases/harvard-ctr-release.zip"
-if os.path.exists(ctr_zip):
-    os.remove(ctr_zip)
+# Package Overleaf release (minimal)
+overleaf_zip = "../releases/warwickbib-overleaf.zip"
+if os.path.exists(overleaf_zip):
+    os.remove(overleaf_zip)
 
-with zipfile.ZipFile(ctr_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+with zipfile.ZipFile(overleaf_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
     zipf.write("harvard-ctr.bbx")
     zipf.write("harvard-ctr.cbx")
     zipf.write("english-ctr.lbx")
-    zipf.write("harvard-ctr.pdf")
-    zipf.write("../README.md", "README.md")
-print(f"Created {ctr_zip}")
-
-# Package Warwick release
-warwick_zip = "../releases/harvard-warwick-release.zip"
-if os.path.exists(warwick_zip):
-    os.remove(warwick_zip)
-
-with zipfile.ZipFile(warwick_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
     zipf.write("harvard-warwick.bbx")
     zipf.write("harvard-warwick.cbx")
     zipf.write("english-warwick.lbx")
-    zipf.write("harvard-warwick.pdf")
     zipf.write("../README.md", "README.md")
-print(f"Created {warwick_zip}")
+print(f"Created {overleaf_zip}")
+
+# Package CTAN release (full source + docs)
+ctan_zip = "../releases/warwickbib-ctan.zip"
+if os.path.exists(ctan_zip):
+    os.remove(ctan_zip)
+
+with zipfile.ZipFile(ctan_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    # Source
+    zipf.write("harvard-ctr.dtx")
+    zipf.write("harvard-warwick.dtx")
+    zipf.write("Makefile")
+    # Docs
+    zipf.write("../README.md", "README.md")
+    zipf.write("harvard-ctr.pdf")
+    zipf.write("harvard-warwick.pdf")
+    # Generated Engine
+    zipf.write("harvard-ctr.bbx")
+    zipf.write("harvard-ctr.cbx")
+    zipf.write("english-ctr.lbx")
+    zipf.write("harvard-warwick.bbx")
+    zipf.write("harvard-warwick.cbx")
+    zipf.write("english-warwick.lbx")
+print(f"Created {ctan_zip}")
 
 print("All releases packaged successfully!")
