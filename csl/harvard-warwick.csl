@@ -21,7 +21,7 @@
         <single>c.</single>
         <multiple>cc.</multiple>
       </term>
-      <term name="edition" form="short">ed.</term>
+      <term name="edition" form="short">edn.</term>
       <term name="editor" form="short">
         <single>ed.</single>
         <multiple>eds</multiple>
@@ -235,7 +235,7 @@
               <if type="bill book chapter musical_score paper-conference report speech standard webpage" match="any">
                 <choose>
                   <if variable="editor">
-                    <text term="in" text-case="capitalize-first" suffix=":"/>
+                    <text term="in" suffix=" "/>
                     <names variable="editor">
                       <name and="text" delimiter-precedes-last="never" initialize-with="."/>
                       <label form="short" prefix=", " suffix="." text-case="lowercase"/>
@@ -829,7 +829,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name-with-initials" disambiguate-add-names="true" disambiguate-add-year-suffix="true" collapse="year" cite-group-delimiter="; ">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name-with-initials" disambiguate-add-names="true" disambiguate-add-year-suffix="true" collapse="year" cite-group-delimiter="; ">
     <sort>
       <key variable="issued"/>
       <key variable="author"/>
@@ -861,7 +861,7 @@
             <text macro="case-law" suffix="."/>
           </else-if>
           <else>
-            <group delimiter=". " suffix=".">
+            <group delimiter=", " suffix=".">
               <group delimiter=", ">
                 <text macro="author"/>
                 <text macro="year-date"/>
