@@ -139,6 +139,10 @@
 \DeclareFieldFormat[dataset]{title}{\mkbibemph{#1} [Dataset]\isdot}
 \DeclareFieldFormat[legislation,jurisdiction]{title}{#1}
 
+% Force [Medium] formatting for obscure item types in CTR
+\DeclareFieldFormat[misc,artwork,audio,video]{type}{\mkbibbrackets{\ifbibstring{#1}{\bibstring{#1}}{#1}}}
+\DeclareFieldFormat[misc,artwork,audio,video]{howpublished}{\mkbibbrackets{#1}}
+
 
 \DeclareFieldFormat{url}{Available at: \url{#1}}
 \setlength{\bibitemsep}{\baselineskip}
