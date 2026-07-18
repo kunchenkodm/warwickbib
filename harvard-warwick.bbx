@@ -178,9 +178,17 @@
 \DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[article]{volume}{#1}
 
-% Prevent ISBN/ISSN from printing to keep references clean as per CTR
+% Prevent ISBN/ISSN/EPRINT from printing to keep references clean as per CTR
 \ExecuteBibliographyOptions{isbn=false, eprint=false, maxbibnames=99, maxcitenames=2, mincitenames=1}
 
+% --- CTR 13th Edition DOI Formatting ---
+% DOIs should be formatted as URLs and must NOT have an accessed date
+\DeclareFieldFormat{doi}{Available at\addcolon\space\url{https://doi.org/#1}}
+\AtEveryBibitem{%
+  \iffieldundef{doi}
+    {}
+    {\clearfield{urlyear}\clearfield{urlmonth}\clearfield{urlday}}%
+}
 % Suppress year formatting for legislation since it is integrated in title
 \renewbibmacro*{date+extrayear}{%
   \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
