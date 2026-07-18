@@ -290,7 +290,7 @@ templates:
   blx_driver: jurisdiction
   bst_driver: techreport
 root:
-- delim: '. '
+- delim: ', '
   do:
   - choose:
     - only:
