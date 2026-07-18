@@ -4,7 +4,7 @@
 
 This repository contains a LaTeX implementation of the
 [Harvard referencing style][warwick-harvard] recommended by the University of Warwick Library and Economics Department.
-It is based on the *Cite Them Right* 13th edition standards with the necessary Warwick overrides (such as retaining the place of publication for books and single quoting journal article titles).
+It is based on the *Cite Them Right* 12th edition standards with the necessary Warwick overrides (such as retaining the place of publication for books and single quoting journal article titles).
 
   + `harvard-warwick.bbx` and `harvard-warwick.cbx`
     contains the implementation for use with [biblatex] and [Biber].

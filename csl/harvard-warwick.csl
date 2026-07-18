@@ -10,7 +10,7 @@
       <name>Dmytro</name>
     </author>
     <category citation-format="author-date"/>
-    <summary>Adaptation of Harvard referencing style used at the University of Warwick (Economics), implementing Cite Them Right 13th edition rules.</summary>
+    <summary>Adaptation of Harvard referencing style used at the University of Warwick (Economics), implementing Cite Them Right 12th edition rules.</summary>
     <updated>2026-07-18T12:00:00+01:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
@@ -47,18 +47,14 @@
             <text variable="archive"/>
           </else>
         </choose>
-        <choose>
-          <if variable="DOI" match="none">
-            <group prefix=" (" suffix=")">
-              <text term="accessed" text-case="capitalize-first" suffix=": "/>
-              <date variable="accessed">
-                <date-part name="day" suffix=" "/>
-                <date-part name="month" suffix=" "/>
-                <date-part name="year"/>
-              </date>
-            </group>
-          </if>
-        </choose>
+        <group prefix=" (" suffix=")">
+          <text term="accessed" text-case="capitalize-first" suffix=": "/>
+          <date variable="accessed">
+            <date-part name="day" suffix=" "/>
+            <date-part name="month" suffix=" "/>
+            <date-part name="year"/>
+          </date>
+        </group>
       </if>
     </choose>
   </macro>
