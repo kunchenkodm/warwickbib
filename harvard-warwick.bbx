@@ -132,12 +132,20 @@
 \DeclareFieldFormat{shorthandwidth}{#1}
 
 \DeclareFieldFormat
-  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  [article,inbook,incollection,inproceedings,patent]
   {title}{`#1\isdot'}
+
+\DeclareFieldFormat[thesis,unpublished]{title}{\mkbibemph{#1\isdot}}
+\DeclareFieldFormat[dataset]{title}{\mkbibemph{#1} [Dataset]\isdot}
 
 \DeclareFieldFormat{url}{Available at: \url{#1}}
 \setlength{\bibitemsep}{\baselineskip}
 \setlength{\bibhang}{0pt}	% removes bibliography paragraph indentation
+
+\DeclareBibliographyAlias{video}{misc}
+\DeclareBibliographyAlias{legislation}{misc}
+\DeclareBibliographyAlias{jurisdiction}{misc}
+\DeclareBibliographyAlias{dataset}{misc}
 
 \DeclareNameAlias{sortname}{family-given}
 
@@ -148,6 +156,9 @@
 \DefineBibliographyStrings{english}{%
 	urlseen = {Accessed: },
 	andothers = {\mkbibemph{et\addabbrvspace al\adddot}},
+	in = {in},
+	editor = {(ed.)},
+	editors = {(eds.)},
 }
 
 \DefineBibliographyExtras{british}{%
