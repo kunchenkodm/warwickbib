@@ -425,10 +425,7 @@
   </macro>
   <macro name="publisher">
     <group delimiter=", ">
-      <group delimiter=": ">
-        <text variable="publisher-place"/>
-        <text variable="publisher"/>
-      </group>
+      <text variable="publisher"/>
       <group>
         <label variable="page" form="short"/>
         <text variable="page"/>

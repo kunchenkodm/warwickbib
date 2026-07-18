@@ -92,12 +92,10 @@ def create_zip_for_branch(branch, edition, is_standard):
     return overleaf_zip, complete_zip
 
 def publish_release(tag, title, notes, files):
-    # Push branch
     # Create tag
     # GH release create
-    run(f"git push -f origin HEAD:{tag}")
     run(f"git tag -f {tag}")
-    run(f"git push -f origin {tag}")
+    run(f"git push -f origin refs/tags/{tag}")
     
     # Delete existing release if it exists
     subprocess.run(f"gh release delete {tag} -y", shell=True, stderr=subprocess.DEVNULL)
