@@ -50,7 +50,3 @@ If you are using a reference manager:
 2. Inside the `csl/` folder, you will find the `.csl` style file.
 3. Import this `.csl` file into Zotero, Mendeley, or Microsoft Word to automatically format your citations according to the exact guidelines.
 
----
-
-## Technical Details
-This repository uses programmatic patching (via Python scripts and Biber sourcemaps) to automatically clean up dirty metadata exports. For example, it will automatically strip redundant issue numbers when a publisher erroneously outputs `OnlineFirst` as a volume, and suppresses redundant URLs when a DOI is provided. You do *not* need to manually clean your `.bib` files.
