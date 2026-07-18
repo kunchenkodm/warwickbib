@@ -142,6 +142,32 @@
 \setlength{\bibitemsep}{\baselineskip}
 \setlength{\bibhang}{0pt}	% removes bibliography paragraph indentation
 
+% --- CTR 12th & Warwick Strict Formatting Overrides ---
+\renewcommand*{\newunitpunct}{\addcomma\space}
+\renewcommand*{\bibinitdelim}{} % No spaces between initials e.g. A.B.
+\DeclareDelimFormat[bib]{nametitledelim}{\addspace} % Space instead of period after (Year)
+
+% Remove "In:" for articles, and change "in: " to "in " for others
+\renewbibmacro*{in:}{%
+  \ifentrytype{article}
+    {}
+    {\printtext{\bibstring{in}\intitlepunct}}}
+\renewcommand*{\intitlepunct}{\addspace}
+
+% Format Volume(Issue) for articles
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[article]{volume}{#1}
+
+% Prevent ISBN/ISSN from printing to keep references clean as per CTR
+\ExecuteBibliographyOptions{isbn=false, eprint=false}
+% ------------------------------------------------------
+
+
 \DeclareBibliographyAlias{video}{misc}
 \DeclareBibliographyAlias{legislation}{misc}
 \DeclareBibliographyAlias{jurisdiction}{misc}
