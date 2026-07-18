@@ -57,8 +57,10 @@
 % Inside \printtext, argumentless macros also need '%' afterwards
 % otherwise the newlines are spaces
 \newbibmacro*{cite:labelyear+extrayear}{%
-  \iffieldundef{labelyear}
+  \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
     {}
+    {\iffieldundef{labelyear}
+      {}
     {\printtext[bibhyperref]{%
      \ifdefstring\blx@dateformat@labeldate{edtf}
        {}
@@ -85,7 +87,7 @@
          \ifdefstring\blx@dateformat@labeldate{edtf}
            {\enddatecircaprintedtf}
            {}%
-         \dateeraprint{labelendyear}}}}}}
+         \dateeraprint{labelendyear}}}}}}}
 
 \newbibmacro*{textcite:postnote}{%
   \iffieldundef{postnote}
