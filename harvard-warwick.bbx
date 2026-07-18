@@ -170,6 +170,21 @@
 \renewcommand*{\intitlepunct}{\addspace}
 
 % Format Volume(Issue) for articles
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addcomma\space}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit}
+
 \renewbibmacro*{volume+number+eid}{%
   \printfield{volume}%
   \printfield{number}%
