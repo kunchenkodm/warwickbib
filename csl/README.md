@@ -1,12 +1,12 @@
-# CSL implementation of the University of Bath's Harvard referencing style
+# CSL implementation of the University of Warwick (Economics) Harvard referencing style
 
 As well as the CSL style itself, this repository also contains the apparatus for
-testing its output against the [specification web page][bath-harvard]. You may
-find it helpful to see how the examples from that page have been coded into a
-[YAML database](bath-csl-test.yaml). The YAML format follows the same principles
+testing its output against the [specification web page][warwick-harvard]. You may
+find it helpful to see how the examples have been coded into a
+[YAML database](warwick-csl-test.yaml). The YAML format follows the same principles
 as [CSL-JSON].
 
-[bath-harvard]: https://library.bath.ac.uk/referencing/harvard-bath
+[warwick-harvard]: https://warwick.ac.uk/services/library/students/referencing/referencing-styles/harvard/
 [CSL-JSON]: https://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html
 
 
