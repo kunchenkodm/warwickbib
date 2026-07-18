@@ -135,8 +135,10 @@
   [article,inbook,incollection,inproceedings,patent]
   {title}{`#1\isdot'}
 
-\DeclareFieldFormat[thesis,unpublished,report]{title}{\mkbibemph{#1\isdot}}
+\DeclareFieldFormat[thesis,unpublished,report,online,video]{title}{\mkbibemph{#1\isdot}}
 \DeclareFieldFormat[dataset]{title}{\mkbibemph{#1} [Dataset]\isdot}
+\DeclareFieldFormat[legislation,jurisdiction]{title}{#1}
+
 
 \DeclareFieldFormat{url}{Available at: \url{#1}}
 \setlength{\bibitemsep}{\baselineskip}
@@ -147,11 +149,20 @@
 \renewcommand*{\bibinitdelim}{} % No spaces between initials e.g. A.B.
 \DeclareDelimFormat[bib]{nametitledelim}{\addspace} % Space instead of period after (Year)
 
-% Remove "In:" for articles, and change "in: " to "in " for others
+% Remove "In:" for articles, and change "in: " to "in " for others. Also prepend editors for chapters.
 \renewbibmacro*{in:}{%
   \ifentrytype{article}
     {}
-    {\printtext{\bibstring{in}\intitlepunct}}}
+    {\printtext{\bibstring{in}\intitlepunct}%
+     \ifboolexpr{ test {\ifentrytype{incollection}} or test {\ifentrytype{inproceedings}} }
+       {\ifnameundef{editor}
+          {}
+          {\printnames{editor}%
+           \setunit{\addspace}%
+           \usebibmacro{editorstrg}%
+           \clearname{editor}%
+           \setunit{\addcomma\space}}}
+       {}}}
 \renewcommand*{\intitlepunct}{\addspace}
 
 % Format Volume(Issue) for articles
@@ -164,14 +175,43 @@
 \DeclareFieldFormat[article]{volume}{#1}
 
 % Prevent ISBN/ISSN from printing to keep references clean as per CTR
-\ExecuteBibliographyOptions{isbn=false, eprint=false}
+\ExecuteBibliographyOptions{isbn=false, eprint=false, maxbibnames=99, maxcitenames=2, mincitenames=1}
+
+% Suppress year formatting for legislation since it is integrated in title
+\renewbibmacro*{date+extrayear}{%
+  \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
+    {}
+    {\iffieldundef{labelyear}
+      {}
+      {\printtext[parens]{%
+         \iffieldsequal{year}{labelyear}
+           {\printlabeldateextra}%
+           {\printfield{labelyear}%
+            \printfield{extrayear}}}}}}
 % ------------------------------------------------------
 
-
 \DeclareBibliographyAlias{video}{misc}
-\DeclareBibliographyAlias{legislation}{misc}
-\DeclareBibliographyAlias{jurisdiction}{misc}
 \DeclareBibliographyAlias{dataset}{misc}
+
+\DeclareBibliographyDriver{legislation}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begrelated}%
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printlist{location}%
+  \setunit*{\addcolon\space}%
+  \printlist{publisher}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
+
+\DeclareBibliographyAlias{jurisdiction}{legislation}
 
 \DeclareNameAlias{sortname}{family-given}
 
@@ -185,6 +225,7 @@
 	in = {in},
 	editor = {(ed.)},
 	editors = {(eds.)},
+    edition = {edn\adddot},
 }
 
 \DefineBibliographyExtras{british}{%
@@ -335,12 +376,15 @@
     {#1}
     {#2}}
 
-\newbibmacro*{labeltitle}{%
-  \iffieldundef{label}
-    {\iffieldundef{shorttitle}
-       {\printfield{title}%
-        \clearfield{title}}
-       {\printfield[title]{shorttitle}}}
-    {\printfield{label}}}
+\renewbibmacro*{labeltitle}{%
+  \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
+    {}
+    {\iffieldundef{label}
+      {\iffieldundef{shorttitle}
+         {\printfield{title}%
+          \clearfield{title}}
+         {\printfield[title]{shorttitle}}}
+      {\printfield{label}}}}
+
 
 \endinput
