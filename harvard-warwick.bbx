@@ -190,8 +190,35 @@
             \printfield{extrayear}}}}}}
 % ------------------------------------------------------
 
-\DeclareBibliographyAlias{video}{misc}
+% Fallback aliases for Zotero and extended BibLaTeX types
+\DeclareBibliographyAlias{artwork}{misc}
+\DeclareBibliographyAlias{audio}{misc}
+\DeclareBibliographyAlias{bill}{legislation}
+\DeclareBibliographyAlias{case}{jurisdiction}
+\DeclareBibliographyAlias{computerprogram}{software}
+\DeclareBibliographyAlias{customa}{misc}
+\DeclareBibliographyAlias{customb}{misc}
+\DeclareBibliographyAlias{customc}{misc}
+\DeclareBibliographyAlias{customd}{misc}
+\DeclareBibliographyAlias{custome}{misc}
+\DeclareBibliographyAlias{customf}{misc}
 \DeclareBibliographyAlias{dataset}{misc}
+\DeclareBibliographyAlias{film}{misc}
+\DeclareBibliographyAlias{hearing}{jurisdiction}
+\DeclareBibliographyAlias{image}{misc}
+\DeclareBibliographyAlias{interview}{misc}
+\DeclareBibliographyAlias{letter}{misc}
+\DeclareBibliographyAlias{manuscript}{unpublished}
+\DeclareBibliographyAlias{map}{misc}
+\DeclareBibliographyAlias{movie}{misc}
+\DeclareBibliographyAlias{music}{misc}
+\DeclareBibliographyAlias{presentation}{unpublished}
+\DeclareBibliographyAlias{statute}{legislation}
+\DeclareBibliographyAlias{tvbroadcast}{misc}
+\DeclareBibliographyAlias{video}{misc}
+\DeclareBibliographyAlias{legal}{legislation}
+
+
 
 \DeclareBibliographyDriver{legislation}{%
   \usebibmacro{bibindex}%
@@ -376,7 +403,7 @@
     {#1}
     {#2}}
 
-\renewbibmacro*{labeltitle}{%
+\newbibmacro*{labeltitle}{%
   \ifboolexpr{ test {\ifentrytype{legislation}} or test {\ifentrytype{jurisdiction}} }
     {}
     {\iffieldundef{label}
@@ -385,6 +412,7 @@
           \clearfield{title}}
          {\printfield[title]{shorttitle}}}
       {\printfield{label}}}}
+
 
 
 \endinput
