@@ -187,11 +187,7 @@
 
 \renewbibmacro*{volume+number+eid}{%
   \printfield{volume}%
-  \iffieldundef{volume}
-    {\printfield{number}}
-    {\iffieldint{volume}
-       {\printfield{number}}
-       {}}%
+  \printfield{number}%
   \setunit{\addcomma\space}%
   \printfield{eid}}
 \DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
@@ -464,4 +460,3 @@
 }
 
 \endinput
-
