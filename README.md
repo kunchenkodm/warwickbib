@@ -1,34 +1,56 @@
-# Programmatic implementations of the University of Warwick (Economics) Harvard referencing style
+# Cite Them Right / Warwick Harvard Referencing Styles
 
-## BibTeX and biblatex styles
+This repository contains robust, programmatic implementations of the **Harvard Referencing Style** based on the *Cite Them Right* (CTR) standards, with specific overrides for the University of Warwick (Economics) style.
 
-This repository contains a LaTeX implementation of the
-[Harvard referencing style][warwick-harvard] recommended by the University of Warwick Library and Economics Department.
-It is based on the *Cite Them Right* 13th edition standards with the necessary Warwick overrides (such as retaining the place of publication for books and single quoting journal article titles).
+Implementations are provided for both **LaTeX (BibLaTeX/Biber)** and **Citation Style Language (CSL)** (used by Zotero, Mendeley, and Word).
 
-  + `harvard-warwick.bbx` and `harvard-warwick.cbx`
-    contains the implementation for use with [biblatex] and [Biber].
+## Available Versions and Releases
 
-[warwick-harvard]: https://warwick.ac.uk/services/library/students/referencing/referencing-styles/harvard/
-[biblatex]: https://ctan.org/pkg/biblatex
-[Biber]: https://ctan.org/pkg/biber
+We maintain four distinct versions of the style to ensure strict compliance depending on your target guidelines. All packages are pre-compiled and available on the [GitHub Releases](../../releases) page:
 
+1. **Cite Them Right 13th Edition (Warwick Economics)**
+   * Based on the CTR 13th edition.
+   * Includes Warwick strict overrides (e.g., retains publisher location for books, uses `Available at:` URL labels).
+   * **[Download v13.0.0-warwick](../../releases/tag/v13.0.0-warwick)**
 
-## Citation Style Language (CSL)
+2. **Cite Them Right 13th Edition (Standard)**
+   * Pure CTR 13th edition compliance (non-Warwick).
+   * Drops publisher location for books, drops `Available at:` URL labels.
+   * **[Download v13.0.0-standard](../../releases/tag/v13.0.0-standard)**
 
-This repository also contains a [CSL implementation](csl/) for maintaining the Warwick Harvard style in [Citation Style Language] (used by tools like Zotero and Mendeley).
+3. **Cite Them Right 12th Edition (Warwick Economics)**
+   * Based on the older CTR 12th edition standard.
+   * Includes Warwick overrides.
+   * **[Download v12.0.0-warwick](../../releases/tag/v12.0.0-warwick)**
 
-You can find the standard CSL file at `csl/harvard-warwick.csl`.
+4. **Cite Them Right 12th Edition (Standard)**
+   * Pure CTR 12th edition compliance.
+   * **[Download v12.0.0-standard](../../releases/tag/v12.0.0-standard)**
 
-[Citation Style Language]: http://docs.citationstyles.org/en/stable/
+---
 
+## Installation & Quick Start
 
-## Quick Start (Overleaf / LaTeX)
+Each GitHub Release contains two ZIP files depending on your workflow:
 
-1. Run the included `./build_overleaf.sh` script to automatically generate a pre-packaged `overleaf_release` directory.
-2. Drag and drop the `harvard-warwick.bbx` and `harvard-warwick.cbx` files into your Overleaf project's root folder.
+### 1. Overleaf / LaTeX Users (`overleaf-package-*.zip`)
+If you are writing in LaTeX (e.g., Overleaf) and just want to use the style:
+1. Download the `overleaf-package-*.zip` from your desired release.
+2. Extract and drag-and-drop the `.bbx` and `.cbx` files directly into your Overleaf project's root directory.
 3. Import the style in your `main.tex` using:
    ```latex
    \usepackage[style=harvard-warwick, backend=biber]{biblatex}
+   % (Use style=harvard-ctr if you downloaded the Standard edition)
    ```
-4. Compile with Biber and you are good to go!
+4. Compile your document using Biber!
+
+### 2. Zotero / Mendeley / Word Users (`biblatex-csl-package-*.zip`)
+If you are using a reference manager:
+1. Download the `biblatex-csl-package-*.zip` from your desired release.
+2. Inside the `csl/` folder, you will find the `.csl` style file.
+3. Import this `.csl` file into Zotero, Mendeley, or Microsoft Word to automatically format your citations according to the exact guidelines.
+
+---
+
+## Technical Details
+This repository uses programmatic patching (via Python scripts and Biber sourcemaps) to automatically clean up dirty metadata exports. For example, it will automatically strip redundant issue numbers when a publisher erroneously outputs `OnlineFirst` as a volume, and suppresses redundant URLs when a DOI is provided. You do *not* need to manually clean your `.bib` files.
