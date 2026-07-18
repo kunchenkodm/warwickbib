@@ -1,86 +1,34 @@
-# Programmatic implementations of the University of Bath's Harvard referencing style
+# Programmatic implementations of the University of Warwick (Economics) Harvard referencing style
 
 ## BibTeX and biblatex styles
 
-This repository contains two LaTeX implementations of the
-[Harvard referencing style][bath-harvard] recommended by the University of Bath
-Library.
+This repository contains a LaTeX implementation of the
+[Harvard referencing style][warwick-harvard] recommended by the University of Warwick Library and Economics Department.
+It is based on the *Cite Them Right* 13th edition standards with the necessary Warwick overrides (such as retaining the place of publication for books and single quoting journal article titles).
 
-  + [`biblatex`](biblatex/)
+  + `harvard-warwick.bbx` and `harvard-warwick.cbx`
     contains the implementation for use with [biblatex] and [Biber].
-  + [`bst`](bst/)
-    contains the implementation for use with [BibTeX].
 
-For details of how to use these styles, please see the PDF documentation bundled
-with the code on the [releases] page, or on the [bath-bst] or [biblatex-bath]
-package pages on CTAN.
-
-[bath-harvard]: https://library.bath.ac.uk/referencing/harvard-bath
+[warwick-harvard]: https://warwick.ac.uk/services/library/students/referencing/referencing-styles/harvard/
 [biblatex]: https://ctan.org/pkg/biblatex
 [Biber]: https://ctan.org/pkg/biber
-[BibTeX]: https://ctan.org/pkg/bibtex
-[releases]: https://github.com/alex-ball/bathbib/releases
-[bath-bst]: https://ctan.org/pkg/bath-bst
-[biblatex-bath]: https://ctan.org/pkg/biblatex-bath
 
 
-## Citation Style Language
+## Citation Style Language (CSL)
 
-This repository also contains a [development area](csl/) for maintaining an
-implementation of the Bath Harvard style in [Citation Style Language]. Please
-look there for [tips on how to arrange your CSL database](csl/README.md)
-to make best use of the style.
+This repository also contains a [CSL implementation](csl/) for maintaining the Warwick Harvard style in [Citation Style Language] (used by tools like Zotero and Mendeley).
 
-Changes made here are submitted upstream to the [official repository][CSL Styles]
-for CSL styles.
+You can find the standard CSL file at `csl/harvard-warwick.csl`.
 
 [Citation Style Language]: http://docs.citationstyles.org/en/stable/
-[CSL Styles]: https://github.com/citation-style-language/styles
 
 
-## Testing
+## Quick Start (Overleaf / LaTeX)
 
-The Python script `check.py` can be used to test the output of the various
-styles. It relies on a lot of dependencies, but not all of them are needed
-for all tests.
-
-- GNU Make
-- `bash`, `awk`, `sed`, `curl`
-- A LaTeX distribution (e.g. TeX Live, MikTeX) with `latexmk`, `lualatex`, etc.
-- `pandoc` v2.11+
-- Python v3.8+ and the Python packages `click`, `lxml` and `pyyaml`
-- LibYAML
-- `citeproc-js-server` running at `http://127.0.0.1:8085`
-
-You can find [`pandoc`] and [`citeproc-js-server`] on GitHub.
-
-[`pandoc`]: https://github.com/jgm/pandoc
-[`citeproc-js-server`]: https://github.com/zotero/citeproc-js-server
-
-To show what testing options are available:
-
-```bash
-./check.py -h
-```
-
-Testing LaTeX styles:
-
-  - `./check.py biblatex`: tests the biblatex output using `bath.bbx` and
-    the more native biblatex `.bib` file.
-  - `./check.py compat`: tests the biblatex output using `bath.bbx` and
-    the BibTeX `.bib` file tailored for `bathx.bst`.
-  - `./check.py bst`: tests the BibTeX output of `bathx.bst`.
-  - `./check.py bst-old`: tests the BibTeX output of `bath.bst`.
-
-Testing the CSL style:
-
-  - `./check.py csl`: tests the output of the Haskell `citeproc` library
-    using `harvard-university-of-bath.csl` via `pandoc`.
-  - `./check.py csl-impl`: tests for variance between the output of the
-    Haskell `citeproc` library and `citeproc-js` when using
-    `harvard-university-of-bath.csl`.
-
-Testing consistency:
-
-  - `./check.py sync`: confirms whether the three implementations are
-    all targeting the same set of LaTeX-formatted references.
+1. Run the included `./build_overleaf.sh` script to automatically generate a pre-packaged `overleaf_release` directory.
+2. Drag and drop the `harvard-warwick.bbx` and `harvard-warwick.cbx` files into your Overleaf project's root folder.
+3. Import the style in your `main.tex` using:
+   ```latex
+   \usepackage[style=harvard-warwick, backend=biber]{biblatex}
+   ```
+4. Compile with Biber and you are good to go!
